@@ -1,7 +1,36 @@
+
+//header
+const whopper = document.getElementById("burger-box");
+// const span = document.querySelectorAll(".burger-box span");
+
+// const contact = document.getElementById('button');
+
+whopper.addEventListener("click", menuRollOut);
+// contact.addEventListener("click", contactRollOut)
+
+// ------------------the nav functionality in header---------------
+function menuRollOut() {
+    const navBox = document.querySelector("nav");
+    navBox.classList.toggle("visible");
+}
+
+//----------dropdown functionality----------------------------
+
+
+
+
+
+
+//end of header
+
+
 let flag = ["./img/belarus.png", "./img/denmark.png", "./img/germany.png", "./img/kazakhstan.png", "./img/lithuanian.png", "./img/uk.png"];
+
+//----------lightbox------------------------------------
 let lightbox = document.querySelector('.lightBox-wrapper');
 let images = document.querySelectorAll('.galleryImage');
 let lightBoxImg = document.querySelector('#lightBoxImg');
+//--------------------------------------------------------
 
 
 const numberOne = document.querySelector("#one");
