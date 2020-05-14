@@ -24,63 +24,60 @@ function menuRollOut() {
 //end of header
 
 
-let flag = ["./img/belarus.png", "./img/denmark.png", "./img/germany.png", "./img/kazakhstan.png", "./img/lithuanian.png", "./img/uk.png"];
-
 //----------lightbox------------------------------------
+
+let flag = ["./img/belarus.png", "./img/denmark.png", "./img/germany.png", "./img/kazakhstan.png", "./img/lithuanian.png", "./img/uk.png"];
 let lightbox = document.querySelector('.lightBox-wrapper');
-let images = document.querySelectorAll('.galleryImage');
-let lightBoxImg = document.querySelector('#lightBoxImg');
+lightbox.addEventListener('click', hideBigImage)
+
 //--------------------------------------------------------
 
-
-const numberOne = document.querySelector("#one");
-const numberTwo = document.querySelector("#two");
-const numberThree = document.querySelector("#three");
-const numberFour = document.querySelector("#four");
-const numberFive = document.querySelector("#five");
-const numberSix = document.querySelector("#six");
-
-
-window.onload = function(){
-    let figureOne =  Math.floor(Math.random() * 6);
-    numberOne.src = flag[figureOne];
-    flag.splice(figureOne, 1);
-
-    let figureTwo =  Math.floor(Math.random() * 5);
-    numberTwo.src = flag[figureTwo];
-    flag.splice(figureTwo, 1);
-
-    let figureThree =  Math.floor(Math.random() * 4);
-    numberThree.src = flag[figureThree];
-    flag.splice(figureThree, 1);
-
-    let figureFour =  Math.floor(Math.random() * 3);
-    numberFour.src = flag[figureFour];
-    flag.splice(figureFour, 1);
-
-    let figureFive =  Math.floor(Math.random() * 2);
-    numberFive.src = flag[figureFive];
-    flag.splice(figureFive, 1);
-
-    let figureSix =  Math.floor(Math.random() * 1);
-    numberSix.src = flag[figureSix];
-    flag.splice(figureSix, 1);
-    
-
-    // -------------------Light-Box ----------------
-
-    //let images = document.querySelectorAll('.galleryImage');
-    for (let i = 0; i < images.length; i++) {
-        images[i].addEventListener('click', function(){
-            lightbox.classList.remove('hidden');
-            lightBoxImg.src = images[i].src;
-        })
-        lightbox.addEventListener('click', function(){
-            lightbox.classList.add('hidden')
-        })
+// mixing the flag gallery with Fisher-Yates algoritm
+function mix(arr){
+    for (let i = flag.length - 1; i > 0; i--) {
+        let r = Math.floor(Math.random()*i);
+        let temp = flag[i]; // img index 5 first round
+        flag[i] = flag[r]; // random image based on random index selection
+        flag[r]= temp; // img index 5 first round
     }
+}
+
+// to show the image big
+function showBigImage(){
+    if (document.querySelector('#lightBox-wrapper').classList.contains('toSee')){
+        return;
+    }
+    document.querySelector('#lightBox-wrapper').classList.add('toSee');
+    document.querySelector('#lightBoxImg').src =this.src; // this refers to img source
+}
+
+//to hide the big image
+function hideBigImage(){
+    document.querySelector('#lightBox-wrapper').classList.remove('toSee');
 
 }
+
+mix(flag);
+
+// appending images to  an empty gallery
+const content = document.querySelector('#content');
+
+for (let i = 0; i < flag.length; i++){
+    //creating an image element to append to the gallery
+    let img = document.createElement('img');
+    // setting the src attribute of the image
+    img.src = flag[i];
+    // setting the alt attribute of the image
+    img.alt = 'Image' + flag[i];
+
+    img.addEventListener('click', showBigImage)
+    //appending the images to the empty gallery in html
+    content.append(img);
+}
+    
+    
+
+   
 
 
 

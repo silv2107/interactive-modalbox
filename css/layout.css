@@ -187,15 +187,16 @@ img:hover{
     width: 80vw;
     position: absolute;
     top: 10vh;
+    display: none;
     
+}
+
+.toSee{
+    display: block;
 }
 
 #lightBoxImg{
     height: 100%;
-}
-
-.hidden{
-    display: none;
 }
 
 
